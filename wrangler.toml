@@ -1,3 +1,8 @@
+account_id = "fe659700f6a5591d902df573c7d0892e"
 name = "phoco"
 main = "src/index.ts"
 compatibility_date = "2022-10-01"
+
+[[r2_buckets]]
+binding = 'CLOUDFLARE_R2'
+bucket_name = 'phoco'
