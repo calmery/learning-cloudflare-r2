@@ -27,7 +27,7 @@ export default {
           headers,
         });
 
-      case "PUT": {
+      case "POST": {
         const contentType = request.headers.get('content-type') || '';
 
         if (!contentType.includes('form')) {
