@@ -27,9 +27,23 @@ export default {
           headers,
         });
 
-      case "PUT":
+      case "PUT": {
+        const contentType = request.headers.get('content-type') || '';
+
+        if (!contentType.includes('form')) {
+          return new Response(null, { status: 400 });
+        }
+
+        const formData = await request.formData();
+        const file = formData.get('file');
+
+        if (!(file instanceof File) || file.type !== 'image/jpeg' || file.size > 10485760 /* 10MB */) {
+          return new Response(null, { status: 400 });
+        }
+
         await env.CLOUDFLARE_R2.put(key, request.body);
-        return new Response(`Put ${key} successfully!`);
+        return new Response(null, { status: 200 });
+      }
 
       default:
         return new Response("Method Not Allowed", {
