@@ -41,7 +41,7 @@ export default {
           return new Response(null, { status: 400 });
         }
 
-        await env.CLOUDFLARE_R2.put(key, request.body);
+        await env.CLOUDFLARE_R2.put(key, await file.arrayBuffer());
         return new Response(null, { status: 200 });
       }
 
